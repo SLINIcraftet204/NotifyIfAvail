@@ -1,0 +1,7 @@
+<config xmlns="https://shopware.com/schemas/plugin-config/1.0">
+    <card>
+        <title>Benachrichtigung Plugin Einstellungen</title>
+        <input-field name="emailSender" type="text" label="E-Mail Absender" defaultValue="shop@example.com"/>
+        <input-field name="emailSubject" type="text" label="E-Mail Betreff" defaultValue="Ihr gewünschter Artikel ist wieder verfügbar!"/>
+    </card>
+</config>

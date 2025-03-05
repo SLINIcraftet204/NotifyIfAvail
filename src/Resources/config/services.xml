@@ -1,0 +1,23 @@
+<?xml version="1.0" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+                               http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="NotifyIfAvail\Storefront\Subscriber\ProductSubscriber">
+            <tag name="kernel.event_subscriber"/>
+        </service>
+
+        <service id="NotifyIfAvail\Controller\NotificationController">
+            <argument type="service" id="doctrine.dbal.default_connection"/>
+            <argument type="service" id="mailer.mailer"/>
+            <tag name="controller.service_arguments"/>
+        </service>
+
+        <service id="NotifyIfAvail\Service\NotificationService">
+            <argument type="service" id="doctrine.dbal.default_connection"/>
+            <argument type="service" id="mailer.mailer"/>
+        </service>
+    </services>
+</container>

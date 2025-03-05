@@ -1,0 +1,28 @@
+{
+  "name": "slinicraftet204/notifyifavail",
+  "description": "benachrichtigt Kunden, sobald ein Produkt wieder verfügbar ist",
+  "version": "0.1.0",
+  "type": "shopware-platform-plugin",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Nils Gerhardt | SLINIcraftet204"
+    }
+  ],
+  "require": {
+    "shopware/core": "6.6.*",
+    "php": ">=8.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "NotifyIfAvail\\": "src/"
+    }
+  },
+  "extra": {
+    "shopware-plugin-class": "NotifyIfAvail\\NotifyIfAvail",
+    "label": {
+      "de-DE": "NotifyIfAvail (von Nils G.|SLINI)",
+      "en-GB": "NotifyIfAvail (by Nils G.|SLINI)"
+    }
+  }
+}

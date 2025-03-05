@@ -1,0 +1,7 @@
+{
+  "NotifyIfAvail": {
+    "notify_me": "Benachrichtigen, wenn verfügbar",
+    "email_placeholder": "Geben Sie Ihre E-Mail-Adresse ein",
+    "success_message": "Sie werden benachrichtigt, sobald der Artikel verfügbar ist."
+  }
+}

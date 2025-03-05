@@ -1,0 +1,4 @@
+<?xml version="1.0" ?>
+<migration xmlns="https://shopware.com/schemas/migration/1.0">
+    <update>NotifyIfAvail\Migration\Migration20250305AddNotificationTable</update>
+</migration>

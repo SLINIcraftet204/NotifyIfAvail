@@ -1,0 +1,34 @@
+{% if product.extensions.notification is defined %}
+    <div id="notification-container">
+        <button class="btn btn-primary" id="notify-me-button">
+            {{ "NotifyIfAvail.notify_me"|trans }}
+        </button>
+
+        <div id="notify-me-form" style="display: none;">
+            <input type="email" id="notify-me-email" class="form-control"
+                   placeholder="{{ 'NotifyIfAvail.email_placeholder'|trans }}" required>
+            <button class="btn btn-success" id="submit-notify">
+                {{ "NotifyIfAvail.notify_me"|trans }}
+            </button>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('notify-me-button').addEventListener('click', function() {
+            document.getElementById('notify-me-form').style.display = 'block';
+        });
+
+        document.getElementById('submit-notify').addEventListener('click', function() {
+            let email = document.getElementById('notify-me-email').value;
+            let productId = '{{ product.id }}';
+
+            fetch('/notification/subscribe', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: `email=${encodeURIComponent(email)}&productId=${encodeURIComponent(productId)}`
+            }).then(response => response.json()).then(data => {
+                alert(data.message);
+            });
+        });
+    </script>
+{% endif %}

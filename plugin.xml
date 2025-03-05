@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="https://developer.shopware.com/schemas/plugin.xsd">
+    <name>NotifyIfAvail</name>
+    <label>Benachrichtigungs Plugin</label>
+    <version>1.0.0</version>
+    <author>TTT-Games</author>
+    <copyright>TTT-Games</copyright>
+    <license>MIT</license>
+    <compatibility minVersion="6.5.0" />
+</plugin>

@@ -1,0 +1,7 @@
+{
+  "NotifyIfAvail": {
+    "notify_me": "Notify me when available",
+    "email_placeholder": "Enter your email address",
+    "success_message": "You will be notified when the item is available."
+  }
+}
