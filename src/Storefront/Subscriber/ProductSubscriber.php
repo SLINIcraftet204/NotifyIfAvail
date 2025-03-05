@@ -4,6 +4,8 @@ namespace NotifyIfAvail\Storefront\Subscriber;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Shopware\Storefront\Page\Product\ProductPageLoadedEvent;
+use Shopware\Core\Framework\DataAbstractionLayer\EntityRepository;
+use Shopware\Core\Framework\Struct\ArrayStruct;
 
 class ProductSubscriber implements EventSubscriberInterface
 {
@@ -19,7 +21,9 @@ class ProductSubscriber implements EventSubscriberInterface
         $product = $event->getPage()->getProduct();
 
         if ($product->getAvailableStock() <= 0) {
-            $product->addExtension('notification', true);
+            $product->addExtension('notifyIfAvail', new ArrayStruct([
+                'enabled' => true
+            ]));
         }
     }
 }

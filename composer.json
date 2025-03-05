@@ -1,7 +1,7 @@
 {
   "name": "slinicraftet204/notifyifavail",
   "description": "benachrichtigt Kunden, sobald ein Produkt wieder verfügbar ist",
-  "version": "0.1.0",
+  "version": "0.1.41",
   "type": "shopware-platform-plugin",
   "license": "MIT",
   "authors": [

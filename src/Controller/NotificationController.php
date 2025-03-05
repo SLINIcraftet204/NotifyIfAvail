@@ -2,24 +2,21 @@
 
 namespace NotifyIfAvail\Controller;
 
-use Shopware\Core\Framework\Routing\Annotation\RouteScope;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Doctrine\DBAL\Connection;
-use Shopware\Core\Framework\Uuid\Uuid;
-use Symfony\Component\Mailer\MailerInterface;
-use Symfony\Component\Mime\Email;
+use NotifyIfAvail\Service\NotificationService;
+use Psr\Log\LoggerInterface;
 
 class NotificationController
 {
-    private Connection $connection;
-    private MailerInterface $mailer;
+    private NotificationService $notificationService;
+    private LoggerInterface $logger;
 
-    public function __construct(Connection $connection, MailerInterface $mailer)
+    public function __construct(NotificationService $notificationService, LoggerInterface $logger)
     {
-        $this->connection = $connection;
-        $this->mailer = $mailer;
+        $this->notificationService = $notificationService;
+        $this->logger = $logger;
     }
 
     /**
@@ -34,13 +31,12 @@ class NotificationController
             return new JsonResponse(['message' => 'Invalid data'], 400);
         }
 
-        $this->connection->insert('notifyifavail_plugin_notification', [
-            'id' => Uuid::randomBytes(),
-            'product_id' => Uuid::fromHexToBytes($productId),
-            'email' => $email,
-            'created_at' => (new \DateTime())->format('Y-m-d H:i:s')
-        ]);
-
-        return new JsonResponse(['message' => 'Successfully subscribed']);
+        try {
+            $this->notificationService->saveNotification($email, $productId);
+            return new JsonResponse(['message' => 'Successfully subscribed']);
+        } catch (\Exception $e) {
+            $this->logger->error('Fehler beim Speichern der Benachrichtigung: ' . $e->getMessage());
+            return new JsonResponse(['message' => 'An error occurred'], 500);
+        }
     }
 }

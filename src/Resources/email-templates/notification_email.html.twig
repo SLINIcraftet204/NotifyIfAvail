@@ -1,13 +1,15 @@
-{SALUTATION} {CUSTOMER_NAME},
+{% block content %}
+    {{ salutation }} {{ customerName }},
 
-Sie haben sich für eine Benachrichtigung angemeldet, sobald der folgende Artikel wieder verfügbar ist:
+    Sie haben sich für eine Benachrichtigung angemeldet, sobald der folgende Artikel wieder verfügbar ist:
 
-**{PRODUCT_NAME}**
-Jetzt wieder auf Lager! Sie können den Artikel hier aufrufen und bestellen:
+    **{{ productName }}**
+    Jetzt wieder auf Lager! Sie können den Artikel hier aufrufen und bestellen:
 
-[Zum Artikel]({PRODUCT_URL})
+    [Zum Artikel]({{ productUrl }})
 
-Vielen Dank für Ihr Interesse an unseren Produkten!
+    Vielen Dank für Ihr Interesse an unseren Produkten!
 
-Beste Grüße,
-Ihr {SHOP_NAME}-Team
+    Beste Grüße,
+    Ihr {{ shopName }}-Team
+{% endblock %}
