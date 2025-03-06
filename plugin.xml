@@ -7,19 +7,4 @@
     <copyright>TTT-Games</copyright>
     <license>MIT</license>
     <compatibility minVersion="6.5.0" />
-
-    <administration>
-        <menu>
-            <item>
-                <name>NotifyIfAvail</name>
-                <label>Benachrichtigungs-Einstellungen</label>
-                <parent>sw-settings-index</parent>
-                <position>50</position>
-                <target>sw.mail.template.detail</target>
-                <params>
-                    <param name="id">c6d2c6141e9f44c4a3eb110d2c58c823</param>
-                </params>
-            </item>
-        </menu>
-    </administration>
 </plugin>

@@ -5,18 +5,16 @@ namespace NotifyIfAvail\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use NotifyIfAvail\Service\NotificationService;
-use Psr\Log\LoggerInterface;
+use Doctrine\DBAL\Connection;
+use Shopware\Core\Framework\Uuid\Uuid;
 
 class NotificationController
 {
-    private NotificationService $notificationService;
-    private LoggerInterface $logger;
+    private Connection $connection;
 
-    public function __construct(NotificationService $notificationService, LoggerInterface $logger)
+    public function __construct(Connection $connection)
     {
-        $this->notificationService = $notificationService;
-        $this->logger = $logger;
+        $this->connection = $connection;
     }
 
     /**
@@ -31,12 +29,13 @@ class NotificationController
             return new JsonResponse(['message' => 'Invalid data'], 400);
         }
 
-        try {
-            $this->notificationService->saveNotification($email, $productId);
-            return new JsonResponse(['message' => 'Successfully subscribed']);
-        } catch (\Exception $e) {
-            $this->logger->error('Fehler beim Speichern der Benachrichtigung: ' . $e->getMessage());
-            return new JsonResponse(['message' => 'An error occurred'], 500);
-        }
+        $this->connection->insert('notifyifavail_plugin_notification', [
+            'id' => Uuid::randomBytes(),
+            'product_id' => Uuid::fromHexToBytes($productId),
+            'email' => $email,
+            'created_at' => (new \DateTime())->format('Y-m-d H:i:s')
+        ]);
+
+        return new JsonResponse(['message' => 'Successfully subscribed']);
     }
 }
